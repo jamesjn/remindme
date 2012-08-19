@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block body %}
+  <table class="table table-striped">
+    <tr>
+      <th>SMS #</th>
+      <th>Time</th>
+      <th>Message</th>
+    </tr>
+    {% for reminder in reminders %}
+      <tr>
+        <td>{{ reminder.number}}</td>
+        <td>{{ reminder.time}}</td>
+        <td>{{ reminder.message}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
