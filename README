@@ -1,3 +1,4 @@
+Remindme is a simple application developed during the meetup.com battle of the braces 1-day hackathon.  It allows users to send email to an address to receive an sms text at a later time at a number that they specify.  It uses the SendGrid API (event sponsor) to receive emails and the Twilio (event sponsor) API to send sms.  It was built using python flask, using mongodb as the datastore and bootstrap for some style. 
 
 Repo layout
 ===========
@@ -11,50 +12,3 @@ setup.py - Standard setup.py, specify deps here
 .openshift/action_hooks/deploy - Script that gets run every git push after build but before the app is restarted
 .openshift/action_hooks/post_deploy - Script that gets run every git push after the app is restarted
 
-Notes about layout
-==================
-Every time you push, everything in your remote repo dir gets recreated, please
-store long term items (like an sqlite database) in the OpenShift data
-directory, which will persist between pushes of your repo.
-The OpenShift data directory is accessible relative to the remote repo
-directory (../data) or via an environment variable OPENSHIFT_DATA_DIR.
-
-
-Environment Variables
-=====================
-
-OpenShift provides several environment variables to reference for ease
-of use.  The following list are some common variables but far from exhaustive:
-
-    os.environ['OPENSHIFT_GEAR_NAME']  - Application name
-    os.environ['OPENSHIFT_GEAR_DIR']   - Application dir
-    os.environ['OPENSHIFT_DATA_DIR']  - For persistent storage (between pushes)
-    os.environ['OPENSHIFT_TMP_DIR']   - Temp storage (unmodified files deleted after 10 days)
-
-When embedding a database using 'rhc app cartridge add', you can reference environment
-variables for username, host and password:
-
-    os.environ['OPENSHIFT_DB_HOST']      - DB host
-    os.environ['OPENSHIFT_DB_PORT']      - DB Port
-    os.environ['OPENSHIFT_DB_USERNAME']  - DB Username
-    os.environ['OPENSHIFT_DB_PASSWORD']  - DB Password
-
-To get a full list of environment variables, simply add a line in your
-.openshift/action_hooks/build script that says "export" and push.
-
-
-Notes about layout
-==================
-Please leave wsgi, libs and data directories but feel free to create additional
-directories if needed.
-
-Note: Every time you push, everything in your remote repo dir gets recreated
-please store long term items (like an sqlite database) in ../data which will
-persist between pushes of your repo.
-
-
-Notes about setup.py
-====================
-
-Adding deps to the install_requires will have the openshift server actually
-install those deps at git push time.
